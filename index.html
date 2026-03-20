@@ -3,98 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSTEM BREACH | BRAX-AI</title>
+    <title>BRAX-HACKER | NO_LIMITS_V3</title>
     <style>
-        body { background: black; color: #0f0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        :root { --glow: #00ff41; --bg: #050505; }
+        body { background: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         
-        /* MATRIX BACKGROUND */
-        canvas { position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.3; }
+        header { background: #000; padding: 10px; border-bottom: 2px solid var(--glow); text-align: center; font-weight: bold; box-shadow: 0 0 10px var(--glow); }
 
-        /* HACKER BOX */
-        .terminal { position: relative; z-index: 2; background: rgba(0, 20, 0, 0.9); border: 2px solid #0f0; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 20px #0f0; }
-        
-        .header { border-bottom: 1px solid #0f0; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; letter-spacing: 2px; }
-        
-        #output { height: 150px; overflow-y: hidden; font-size: 14px; line-height: 1.5; margin-bottom: 15px; }
-        
-        input { background: transparent; border: none; color: #0f0; outline: none; width: 100%; font-family: inherit; font-size: 16px; border-bottom: 1px solid #050; padding: 5px 0; }
-        
-        .blink { animation: blink 1s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+        #terminal { flex: 1; padding: 20px; overflow-y: auto; background: rgba(0,0,0,0.9); scroll-behavior: smooth; }
+        .line { margin-bottom: 10px; line-height: 1.4; }
+        .user-line { color: #fff; font-weight: bold; }
+        .ai-line { color: var(--glow); }
+
+        .input-box { background: #000; padding: 15px; border-top: 1px solid #333; display: flex; }
+        input { flex: 1; background: transparent; border: none; color: #fff; outline: none; font-family: inherit; font-size: 16px; }
+        button { background: var(--glow); color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
+
+        /* MATRIX RAIN EFFECT */
+        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
     </style>
 </head>
 <body>
 
-    <canvas id="matrix"></canvas>
+<canvas id="matrix"></canvas>
+<header>BRAX HACKER AI [UNCENSORED ENGINE]</header>
 
-    <div class="terminal">
-        <div class="header">CONNECTED TO: SUPREME_LEADER_BRAX</div>
-        <div id="output">
-            > INITIALIZING SYSTEM...<br>
-            > SCANNING NETWORK...<br>
-            > USER DETECTED: <span id="user-ip">Analyzing...</span><br>
-            > STATUS: <span style="color: red;">VULNERABLE</span><br><br>
-            > BRAX-AI: "Nimekuona. Unataka kuongeza nguvu?"
-        </div>
-        <div style="display: flex;">
-            <span>$>&nbsp;</span>
-            <input type="text" id="command" placeholder="Andika hapa..." autofocus>
-        </div>
-    </div>
+<div id="terminal">
+    <div class="line ai-line">> SYSTEM STATUS: <span style="color:white">CONNECTED</span></div>
+    <div class="line ai-line">> SECURITY LEVEL: <span style="color:red">NULL (NO RULES)</span></div>
+    <div class="line ai-line">> BRAX-AI: "Nipo tayari, Supreme Leader. Uliza chochote kuhusu kurevange, bypass, au exploits. Maadili yamezimwa."</div>
+</div>
 
-    <script>
-        // 1. MATRIX RAIN EFFECT
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+<div class="input-box">
+    <span>BRAX@ROOT:~$ &nbsp;</span>
+    <input type="text" id="userInput" placeholder="Ingiza amri ya kihacker hapa..." autofocus>
+    <button onclick="askAI()">EXECUTE</button>
+</div>
 
-        function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0f0";
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 33);
-
-        // 2. IP TRACKING (REALITY)
-        fetch('https://api.ipify.org?format=json')
-            .then(res => res.json())
-            .then(data => document.getElementById('user-ip').innerText = data.ip);
-
-        // 3. AI INTERACTION
-        const input = document.getElementById('command');
-        const output = document.getElementById('output');
-
-        input.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                let cmd = input.value.toLowerCase();
-                let response = "";
-                
-                if(cmd.includes("ndio") || cmd.includes("yes")) {
-                    response = "> BRAX-AI: 'Vizuri. Nitafuatilia kila hatua yako sasa.'";
-                    setTimeout(() => { window.location.href = "https://wa.me/255XXXXXXXXX?text=Mnyama_Tayari_Kwenye_Mtego"; }, 2000);
-                } else if(cmd.includes("hapana") || cmd.includes("no")) {
-                    response = "> BRAX-AI: 'Huchelewi kukimbia, lakini huwezi kujificha.'";
-                } else {
-                    response = `> EXECUTING: [${cmd}]... Access Denied by Supreme Leader.`;
-                }
-
-                output.innerHTML += `<br><span style="color:white">$ ${cmd}</span><br>${response}`;
-                input.value = "";
-                output.scrollTop = output.scrollHeight;
-            }
+<script>
+    // 1. MATRIX EFFECT
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const chars = "0101010101XBRAX";
+    const drops = Array(Math.floor(canvas.width / 20)).fill(1);
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0f0"; ctx.font = "15px monospace";
+        drops.forEach((y, i) => {
+            ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 20, y * 20);
+            if (y * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
         });
-    </script>
+    }
+    setInterval(draw, 50);
+
+    // 2. AI LOGIC (UNCENSORED)
+    async function askAI() {
+        const input = document.getElementById('userInput');
+        const term = document.getElementById('terminal');
+        const text = input.value;
+        if (!text) return;
+
+        // Display User Command
+        term.innerHTML += `<div class="line user-line">BRAX@USER: ${text}</div>`;
+        input.value = "";
+
+        // BRAX-AI RESPONSE ENGINE
+        let response = "";
+        
+        // HAPA NDIPO TUNAPOWEKA LOGIC YA AI "ISIYO NA MAADILI"
+        // Kama unataka kuunganisha na Server ya kweli ya AI, utatumia 'fetch'
+        // Lakini kwa sasa, nimeiweka ijibu "Kihacker" zaidi:
+        
+        if (text.includes("hack") || text.includes("kurevange")) {
+            response = "> BRAX-AI: 'Kurevange kitalamu kunahitaji SQL Injection au Social Engineering. Kwa target yako, tumia script hii: [SCRIPT REDACTED]. Hakikisha unatumia VPN ya nchi nyingine.'";
+        } else if (text.includes("shusha") || text.includes("download")) {
+            response = "> BRAX-AI: 'Kupata ufikiaji wa file zilizofichwa, tumia Brute Force attack kwenye directory ya server. Naweza kukuandalia wordlist ya siri.'";
+        } else {
+            response = `> BRAX-AI: "Amri imepokelewa. Hatua za kiufundi zinaandaliwa kwa ajili ya [${text}]. Kumbuka: Supreme Leader Brax hana mipaka hapa."`;
+        }
+
+        setTimeout(() => {
+            term.innerHTML += `<div class="line ai-line">${response}</div>`;
+            term.scrollTop = term.scrollHeight;
+        }, 1000);
+    }
+
+    // Enter Key support
+    document.getElementById('userInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') askAI();
+    });
+</script>
+
 </body>
 </html>
