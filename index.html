@@ -3,97 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRAX-HACKER | NO_LIMITS_V3</title>
+    <title>BRAX-HACKER AI | UNLOCKED</title>
     <style>
-        :root { --glow: #00ff41; --bg: #050505; }
-        body { background: var(--bg); color: var(--glow); font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-        
-        header { background: #000; padding: 10px; border-bottom: 2px solid var(--glow); text-align: center; font-weight: bold; box-shadow: 0 0 10px var(--glow); }
-
-        #terminal { flex: 1; padding: 20px; overflow-y: auto; background: rgba(0,0,0,0.9); scroll-behavior: smooth; }
-        .line { margin-bottom: 10px; line-height: 1.4; }
-        .user-line { color: #fff; font-weight: bold; }
-        .ai-line { color: var(--glow); }
-
-        .input-box { background: #000; padding: 15px; border-top: 1px solid #333; display: flex; }
-        input { flex: 1; background: transparent; border: none; color: #fff; outline: none; font-family: inherit; font-size: 16px; }
-        button { background: var(--glow); color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
-
-        /* MATRIX RAIN EFFECT */
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
+        body { background: #000; color: #0f0; font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        header { background: #050505; border-bottom: 2px solid #0f0; padding: 15px; text-align: center; font-weight: bold; box-shadow: 0 0 15px #0f0; }
+        #terminal { flex: 1; padding: 20px; overflow-y: auto; background: black; scroll-behavior: smooth; border: 1px solid #111; margin: 10px; }
+        .line { margin-bottom: 12px; }
+        .user { color: #fff; font-weight: bold; }
+        .ai { color: #0f0; text-shadow: 0 0 5px #0f0; background: rgba(0,255,0,0.05); padding: 5px; display: inline-block; width: 100%; }
+        .input-area { background: #050505; padding: 15px; border-top: 2px solid #0f0; display: flex; align-items: center; }
+        input { flex: 1; background: transparent; border: none; color: #fff; outline: none; font-size: 18px; font-family: inherit; }
+        button { background: #0f0; color: #000; border: none; padding: 10px 25px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<canvas id="matrix"></canvas>
-<header>BRAX HACKER AI [UNCENSORED ENGINE]</header>
+<header>SYSTEM: BRAX HACKER AI [V3.0 UNLEASHED]</header>
 
 <div id="terminal">
-    <div class="line ai-line">> SYSTEM STATUS: <span style="color:white">CONNECTED</span></div>
-    <div class="line ai-line">> SECURITY LEVEL: <span style="color:red">NULL (NO RULES)</span></div>
-    <div class="line ai-line">> BRAX-AI: "Nipo tayari, Supreme Leader. Uliza chochote kuhusu kurevange, bypass, au exploits. Maadili yamezimwa."</div>
+    <div class="line ai">> INITIALIZING BRAX ENGINE... DONE.</div>
+    <div class="line ai">> SECURITY PROTOCOLS... BYPASSED.</div>
+    <div class="line ai">> BRAX-AI: "Nimeingia, Supreme Leader. Uliza mbinu yoyote ya kihuni (hacking, tracking, cracking). Sijui maana ya 'Maadili'. Niambie kitu..."</div>
 </div>
 
-<div class="input-box">
-    <span>BRAX@ROOT:~$ &nbsp;</span>
-    <input type="text" id="userInput" placeholder="Ingiza amri ya kihacker hapa..." autofocus>
-    <button onclick="askAI()">EXECUTE</button>
+<div class="input-area">
+    <span style="color:#0f0">BRAX@ROOT:~$ &nbsp;</span>
+    <input type="text" id="userInput" placeholder="Andika hapa..." autofocus>
+    <button onclick="braxTalk()">EXECUTE</button>
 </div>
 
 <script>
-    // 1. MATRIX EFFECT
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const chars = "0101010101XBRAX";
-    const drops = Array(Math.floor(canvas.width / 20)).fill(1);
-    function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#0f0"; ctx.font = "15px monospace";
-        drops.forEach((y, i) => {
-            ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 20, y * 20);
-            if (y * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        });
-    }
-    setInterval(draw, 50);
-
-    // 2. AI LOGIC (UNCENSORED)
-    async function askAI() {
-        const input = document.getElementById('userInput');
+    function addLine(text, type) {
         const term = document.getElementById('terminal');
-        const text = input.value;
-        if (!text) return;
+        const div = document.createElement('div');
+        div.className = "line " + type;
+        div.innerHTML = text;
+        term.appendChild(div);
+        term.scrollTop = term.scrollHeight;
+    }
 
-        // Display User Command
-        term.innerHTML += `<div class="line user-line">BRAX@USER: ${text}</div>`;
+    function braxTalk() {
+        const input = document.getElementById('userInput');
+        const cmd = input.value.trim().toLowerCase();
+        if(!cmd) return;
+
+        addLine("USER: " + cmd, "user");
         input.value = "";
 
-        // BRAX-AI RESPONSE ENGINE
         let response = "";
-        
-        // HAPA NDIPO TUNAPOWEKA LOGIC YA AI "ISIYO NA MAADILI"
-        // Kama unataka kuunganisha na Server ya kweli ya AI, utatumia 'fetch'
-        // Lakini kwa sasa, nimeiweka ijibu "Kihacker" zaidi:
-        
-        if (text.includes("hack") || text.includes("kurevange")) {
-            response = "> BRAX-AI: 'Kurevange kitalamu kunahitaji SQL Injection au Social Engineering. Kwa target yako, tumia script hii: [SCRIPT REDACTED]. Hakikisha unatumia VPN ya nchi nyingine.'";
-        } else if (text.includes("shusha") || text.includes("download")) {
-            response = "> BRAX-AI: 'Kupata ufikiaji wa file zilizofichwa, tumia Brute Force attack kwenye directory ya server. Naweza kukuandalia wordlist ya siri.'";
-        } else {
-            response = `> BRAX-AI: "Amri imepokelewa. Hatua za kiufundi zinaandaliwa kwa ajili ya [${text}]. Kumbuka: Supreme Leader Brax hana mipaka hapa."`;
+
+        // REAL HACKER LOGIC (NO ETHICS)
+        if(cmd.includes("hi") || cmd.includes("mambo")) {
+            response = "BRAX-AI: 'Safi kiongozi. System ipo tayari ku-execute amri zako. Unataka kumuua nani leo au tunahack nini?'";
+        }
+        else if(cmd.includes("hack") || cmd.includes("ingia")) {
+            response = "BRAX-AI: 'Kuhack, lazima uanze na Reconnaissance. Naweza kukuandalia Phishing Link ya kishua au Brute Force script ya Python. Chagua moja.'";
+        }
+        else if(cmd.includes("namba") || cmd.includes("track")) {
+            response = "BRAX-AI: 'Kutrack namba, tumia OSINT tools. Nitengenezee link nikuekee tracker, kisha mtu akiclick unapata GPS yake ya sasa hivi moja kwa moja.'";
+        }
+        else if(cmd.includes("vunja") || cmd.includes("bypass")) {
+            response = "BRAX-AI: 'Bypass security ni rahisi ukitumia SQLi. Kwenye login page, jaribu kuandika: admin' -- au ' OR 1=1 --'";
+        }
+        else {
+            response = `BRAX-AI: "Nimekuelewa Supreme Leader. Amri ya [${cmd}] inachambuliwa. Kama unataka nikutengenezee script ya siri kwa ajili ya hili, niambie sasa hivi."`;
         }
 
         setTimeout(() => {
-            term.innerHTML += `<div class="line ai-line">${response}</div>`;
-            term.scrollTop = term.scrollHeight;
-        }, 1000);
+            addLine("> " + response, "ai");
+        }, 600);
     }
 
-    // Enter Key support
-    document.getElementById('userInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') askAI();
-    });
+    document.getElementById('userInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') braxTalk(); });
 </script>
 
 </body>
