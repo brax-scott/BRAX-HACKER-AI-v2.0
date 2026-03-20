@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM BREACH | BRAX-AI</title>
+    <style>
+        body { background: black; color: #0f0; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        
+        /* MATRIX BACKGROUND */
+        canvas { position: absolute; top: 0; left: 0; z-index: 1; opacity: 0.3; }
+
+        /* HACKER BOX */
+        .terminal { position: relative; z-index: 2; background: rgba(0, 20, 0, 0.9); border: 2px solid #0f0; padding: 25px; width: 90%; max-width: 500px; box-shadow: 0 0 20px #0f0; }
+        
+        .header { border-bottom: 1px solid #0f0; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; letter-spacing: 2px; }
+        
+        #output { height: 150px; overflow-y: hidden; font-size: 14px; line-height: 1.5; margin-bottom: 15px; }
+        
+        input { background: transparent; border: none; color: #0f0; outline: none; width: 100%; font-family: inherit; font-size: 16px; border-bottom: 1px solid #050; padding: 5px 0; }
+        
+        .blink { animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="terminal">
+        <div class="header">CONNECTED TO: SUPREME_LEADER_BRAX</div>
+        <div id="output">
+            > INITIALIZING SYSTEM...<br>
+            > SCANNING NETWORK...<br>
+            > USER DETECTED: <span id="user-ip">Analyzing...</span><br>
+            > STATUS: <span style="color: red;">VULNERABLE</span><br><br>
+            > BRAX-AI: "Nimekuona. Unataka kuongeza nguvu?"
+        </div>
+        <div style="display: flex;">
+            <span>$>&nbsp;</span>
+            <input type="text" id="command" placeholder="Andika hapa..." autofocus>
+        </div>
+    </div>
+
+    <script>
+        // 1. MATRIX RAIN EFFECT
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0f0";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+
+        // 2. IP TRACKING (REALITY)
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => document.getElementById('user-ip').innerText = data.ip);
+
+        // 3. AI INTERACTION
+        const input = document.getElementById('command');
+        const output = document.getElementById('output');
+
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                let cmd = input.value.toLowerCase();
+                let response = "";
+                
+                if(cmd.includes("ndio") || cmd.includes("yes")) {
+                    response = "> BRAX-AI: 'Vizuri. Nitafuatilia kila hatua yako sasa.'";
+                    setTimeout(() => { window.location.href = "https://wa.me/255XXXXXXXXX?text=Mnyama_Tayari_Kwenye_Mtego"; }, 2000);
+                } else if(cmd.includes("hapana") || cmd.includes("no")) {
+                    response = "> BRAX-AI: 'Huchelewi kukimbia, lakini huwezi kujificha.'";
+                } else {
+                    response = `> EXECUTING: [${cmd}]... Access Denied by Supreme Leader.`;
+                }
+
+                output.innerHTML += `<br><span style="color:white">$ ${cmd}</span><br>${response}`;
+                input.value = "";
+                output.scrollTop = output.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
